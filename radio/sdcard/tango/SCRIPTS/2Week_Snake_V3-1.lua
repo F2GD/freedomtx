@@ -39,8 +39,8 @@ local foodCount = 0
 local twoWeeksScore = 0
 
 function sleep(ms)
-  local ntime = getTime(ms)
-  repeat until getTime > ntime
+  local ntime = (getTime() + ms)
+  repeat until getTime() > ntime
 end
 
 local function twoWeeks()
