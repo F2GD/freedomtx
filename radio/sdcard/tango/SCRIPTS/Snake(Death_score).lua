@@ -91,7 +91,7 @@ local function move()
     Tail.y = Tail.y + Tail.dy
   end
 
-  lcd.drawText(Head.x * 6, Head.y * 8, "\203", 0)
+  lcd.drawText(Head.x * 6, Head.y * 8, "T", 0)
 end
 
 local function init()
@@ -115,7 +115,7 @@ local function init()
   
   for i = 0, size - 1, 1 do
     game_map[ Tail.x + ( i * Tail.dx ) ][ Tail.y + ( i * Tail.dy ) ] = direction
-    lcd.drawText( ( Tail.x + ( i * Tail.dx ) ) * 6, ( Tail.y + ( i * Tail.dy ) ) * 8, "\203", 0 )
+    lcd.drawText( ( Tail.x + ( i * Tail.dx ) ) * 6, ( Tail.y + ( i * Tail.dy ) ) * 8, "T", 0 )
   end
   
   create_food()
