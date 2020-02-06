@@ -5,7 +5,7 @@
 -- Dado Sutter
 -- Ives Negreiros
 -- To Benjamin
----------------------------------------------------------------
+--------------------------------------------------------------
 
 local xMax = math.floor( LCD_W / 6 ) - 1
 local yMax = math.floor( LCD_H / 8 ) - 1
@@ -59,7 +59,18 @@ local function check_collision()
   end
   return false
 end
-
+ 
+function direction(i)
+  if i == "right" then
+    return ">"
+    elseif i == "left" then
+    return "<"
+    elseif i == "up" then
+    return "^"
+    elseif i == "down" then
+    return "v"
+    end
+  end
 
 local function move()
   if game_map[ Tail.x ][ Tail.y ] == "right" then
@@ -91,7 +102,7 @@ local function move()
     Tail.y = Tail.y + Tail.dy
   end
 
-  lcd.drawText(Head.x * 6, Head.y * 8, "T", 0)
+  lcd.drawText(Head.x * 6, Head.y * 8, arrow(direction), 0)
 end
 
 local function init()
@@ -115,7 +126,7 @@ local function init()
   
   for i = 0, size - 1, 1 do
     game_map[ Tail.x + ( i * Tail.dx ) ][ Tail.y + ( i * Tail.dy ) ] = direction
-    lcd.drawText( ( Tail.x + ( i * Tail.dx ) ) * 6, ( Tail.y + ( i * Tail.dy ) ) * 8, "T", 0 )
+    lcd.drawText( ( Tail.x + ( i * Tail.dx ) ) * 6, ( Tail.y + ( i * Tail.dy ) ) * 8, ">", 0 )
   end
   
   create_food()
@@ -167,7 +178,7 @@ local function run(event)
   lcd.refresh()
 
   if check_collision() then
-  error(score)
+ -- error(score)
     return 1
   end
   
