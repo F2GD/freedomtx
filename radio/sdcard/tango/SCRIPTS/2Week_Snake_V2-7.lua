@@ -167,13 +167,13 @@ local function endScreen()
   lcd.drawText( ((LCD_W / 2) - 6), ((LCD_H /4) * 3), "2weeks", DBLSIZE)
  end
 
-local function blankRectangle()
-   for i=20, (LCD_H - 20), 1 do
-    for k=20, (LCD_W - 20), 1 do
-      lcd.drawText(i, k, " " ,0)
-    end
-  end
-end
+--local function blankRectangle()
+ --  for i=20, (LCD_H - 20), 1 do
+  --  for k=20, (LCD_W - 20), 1 do
+  --    lcd.drawText(i, k, " " ,0)
+ --   end
+ -- end
+--end
 
 local function scoreOutput() 
          if score == 222 then
@@ -193,7 +193,7 @@ local function scoreOutput()
   --    end
   --  end
   
-  blankRectangle()
+  --blankRectangle()
   endScreen()
   lcd.refresh()
   
