@@ -31,6 +31,24 @@ Tail.dx = Head.dx
 Tail.dy = Head.dy
 local direction = "right"
 local score = 0
+local foodCount = 0
+
+local function twoWeeks()
+  if foodCount == 0 then
+    return "2"
+    elseif foodCount == 1 then
+    return "W"
+    elseif foodCount == 2 then
+    return "e"
+    elseif foodCount == 3 then
+    return "e"
+    elseif foodCount == 4 then
+    return "k"
+    elseif foodCount == 5 then
+    foodCount = 0
+    return "s"
+    end
+  end
 
 local function create_food()
   Food.x, Food.y = math.random( xMax - 1), math.random( yMax - 1)
@@ -38,7 +56,8 @@ local function create_food()
     Food.x, Food.y = math.random( xMax - 1 ), math.random( yMax - 1 )
   end
   game_map[ Food.x ][ Food.y ] = "food"
-  lcd.drawText( Food.x * 6, Food.y * 8, "2", 0 )
+  lcd.drawText( Food.x * 6, Food.y * 8, twoWeeks(), 0 )
+  foodCount = foodCount + 1
 end
 
 local function eat_food()
