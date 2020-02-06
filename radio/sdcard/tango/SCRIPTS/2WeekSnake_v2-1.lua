@@ -38,6 +38,7 @@ local foodCount = 0
 local twoWeeksScore = 0
 
 local function twoWeeks()
+ twoWeeksScore = twoWeeksScore + 0.2
   if foodCount == 0 then
     return "2"
     elseif foodCount == 1 then
@@ -50,7 +51,6 @@ local function twoWeeks()
     return "k"
     elseif foodCount == 5 then
     foodCount = 0
-    twoWeeksScore = twoWeeksScore + 1
     return "s"
     end
   end
@@ -71,6 +71,7 @@ local function eat_food()
   game_map[ Head.x ][ Head.y ] = nil
   create_food()
   score = score + 1
+  
 end
 
 local function check_collision()
@@ -143,6 +144,8 @@ local function init()
   Tail.dx = Head.dx
   Tail.dy = Head.dy
   direction = "right"
+  
+  lcd.drawRectangle(1 ,1 ,LCD_W, LCD_H)
 
   for i = 0, xMax, 1 do
     game_map[ i ] = {}
@@ -156,25 +159,57 @@ local function init()
   create_food()
 end
 
-local function scoreOutput()
-  for i=0, yMax, 1 do
-    for k=0, xMax, 1 do
-      lcd.drawText( (i,k,"*",0))
-      end
-    end
-  lcd.refresh()
-  for i=0, yMax, 1 do
-    for k=0, xMax, 1 do
+local function endScreen()
+  lcd.drawRectangle(20 , 20 , (LCD_W - 21), (LCD_H - 21), SOLID , 2)
+  lcd.drawText( ((LCD_W / 2) - 6), (LCD_H / 4), "You scored:", BLINK)
+  lcd.drawText( (LCD_W / 2), (LCD_H / 2), twoWeeksScore,  MIDSIZE )
+  lcd.drawText( ((LCD_W / 2) - 6), ((LCD_H /4) * 3), "2weeks", DBLSIZE)
+ end
+
+local function blankRectangle()
+   for i=20, (LCD_H - 20), 1 do
+    for k=20, (LCD_W - 20), 1 do
       lcd.drawText( (i,k," ",0))
+    end
+  end
+end
+
+local function scoreOutput() 
+         if score == 222 then
+           lcd.drawText(1, LCD_H, "You collected a total of 222, Mike will get his sticks", SMLSIZE)
+           lcd.drawText((LCD_W / 4), 1, "YOU WIN!", XXLSIZE) 
+           lcd.drawtext(1, (LCD_H / 4), "You have 120 Seconds to take a photo of this screen", BLINK)
+           lcd.drawtext(1, (LCD_H / 4), "Please post it to the Team Blacksheep Lounge on FB", INVERS)
+             for j=0, 120, 1 do
+               lcd.refresh()
+             end
+          end
+  
+    
+    for i=0, LCD_H, 1 do
+      for k=0, LCD_W, 1 do
+        lcd.drawText( (i,k,"*", 0))
       end
     end
+  
+  blankRectangle
+  endScreen()
   lcd.refresh()
-  lcd.drawText( ((xMax / 2) - 11), ((yMax / 2) -5), "You scored:", 0)
-  lcd.drawText( (xMax / 2), (yMax / 2), twoWeeksScore, 0)
-  lcd.drawText( ((xMax / 2) - 11), ((yMax / 2) + 5), "2weeks", 0)
-  lcd.refresh()
-  lcd.refresh()
+  
+    for i=0, LCD_H, 1 do
+       for k=0, LCD_W, 1 do
+         lcd.drawText( (i,k,"*", INVERS))
+       end
+   
   end
+ blankRectangle()
+ endScreen()
+  
+ lcd.refresh() 
+ lcd.refresh()
+ lcd.refresh()
+ lcd.refresh()
+end
 
 local snakeCounter = 0
 
@@ -220,6 +255,11 @@ local function run(event)
   move()
 
   lcd.refresh()
+ 
+  if score == 222 then
+    scoreOutput()
+    return 1
+  end
 
   if check_collision() then
     scoreOutput()
