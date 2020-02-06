@@ -8,6 +8,7 @@
 --
 --
 -- Edited by Finn Toogood
+-- Massive thanks to Marc Stelzner for testing adn bug finding
 --------------------------------------------------------------
 
 local xMax = math.floor( LCD_W / 6 ) - 1
@@ -145,7 +146,7 @@ local function init()
   Tail.dy = Head.dy
   direction = "right"
   
-  lcd.drawRectangle(1 ,1 ,LCD_W, LCD_H)
+  lcd.drawRectangle(1 ,1 ,(LCD_W - 1), (LCD_H - 1))
 
   for i = 0, xMax, 1 do
     game_map[ i ] = {}
