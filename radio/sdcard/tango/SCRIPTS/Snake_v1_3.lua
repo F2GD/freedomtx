@@ -60,7 +60,7 @@ local function check_collision()
   return false
 end
  
-function direction(i)
+function arrow(i)
   if i == "right" then
     return ">"
     elseif i == "left" then
