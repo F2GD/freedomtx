@@ -188,7 +188,7 @@ local function scoreOutput()
     
     for i=0, LCD_H, 1 do
       for k=0, LCD_W, 1 do
-        lcd.drawText( (i,k,"*", 0))
+        lcd.drawText( i,k,"*", 0)
       end
     end
   
@@ -198,7 +198,7 @@ local function scoreOutput()
   
     for i=0, LCD_H, 1 do
        for k=0, LCD_W, 1 do
-         lcd.drawText( (i,k,"*", INVERS))
+         lcd.drawText( i,k,"*", INVERS)
        end
    
   end
