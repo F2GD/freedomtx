@@ -192,7 +192,7 @@ local function scoreOutput()
       end
     end
   
-  blankRectangle
+  blankRectangle()
   endScreen()
   lcd.refresh()
   
