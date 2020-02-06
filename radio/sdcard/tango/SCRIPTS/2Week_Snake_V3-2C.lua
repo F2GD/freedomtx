@@ -38,10 +38,18 @@ local score = 0
 local foodCount = 0
 local twoWeeksScore = 0
 
-function sleep(ms)
+local function sleep(ms)
   local ntime = (getTime() + ms)
   repeat until getTime() > ntime
 end
+
+local funtion speed()
+  if getValue('sa') < -900 and getValue('sd') < -900 then
+    return (101 - (((getValue('thr')+1024) / 20.48) + 1)) -- throttle is -1024 to 1024. convert this to 2048 and divide by 20.48 gives us a scale of 100. By adding 1 the lowest time per frame is 10ms up to a max of 1010ms 
+  else
+    return 50 
+end
+
 
 local function twoWeeks()
  twoWeeksScore = twoWeeksScore + 0.2
@@ -91,7 +99,7 @@ local function check_collision()
   return false
 end
  
-function arrow(i)
+local function arrow(i)
   if i == "right" then
     return ">"
     elseif i == "left" then
@@ -172,13 +180,6 @@ local function endScreen()
   lcd.drawText( ((LCD_W / 2) - 6), ((LCD_H /4) * 3), "2weeks", DBLSIZE)
  end
 
---local function blankRectangle()
- --  for i=20, (LCD_H - 20), 1 do
-  --  for k=20, (LCD_W - 20), 1 do
-  --    lcd.drawText(i, k, " " ,0)
- --   end
- -- end
---end
 
 local function scoreOutput() 
          if score == 222 then
@@ -186,16 +187,12 @@ local function scoreOutput()
            lcd.drawText((LCD_W / 4), 1, "YOU WIN!", XXLSIZE) 
            lcd.drawtext(1, (LCD_H / 4), "You have 120 Seconds to take a photo of this screen", BLINK)
            lcd.drawtext(1, (LCD_H / 4), "Please post it to the Team Blacksheep Lounge on FB", INVERS)
-             sleep(12000)
+             sleep(12000)          
           end
   
   lcd.clear()  
   endScreen()
   sleep(500)
-  
-
-  
- 
 end
 
 local snakeCounter = 0
@@ -241,7 +238,7 @@ local function run(event)
   direction = dir
   move()
 
-  sleep(50)
+  sleep(speed())
  
   if score == 222 then
     scoreOutput()
