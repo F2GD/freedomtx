@@ -11,8 +11,8 @@
 -- Massive thanks to Marc Stelzner for testing adn bug finding
 --------------------------------------------------------------
 
-local xMax = math.floor( LCD_W / 6 ) - 2
-local yMax = math.floor( LCD_H / 8 ) - 2
+local xMax = math.floor( LCD_W / 6 ) - 1
+local yMax = math.floor( LCD_H / 8 ) - 1
 local game_map = {}
 
 local Head = {}
@@ -89,9 +89,9 @@ local function eat_food()
 end
 
 local function check_collision()
-  if Head.x < 1 or Head.x > xMax then
+  if Head.x < 0 or Head.x > xMax then
     return true
-  elseif Head.y < 1 or Head.y > yMax then
+  elseif Head.y < 0 or Head.y > yMax then
     return true
   elseif ( ( game_map[ Head.x ][ Head.y ] ) and ( game_map[ Head.x ][ Head.y ] ~= "food" ) ) then
     return true
@@ -159,7 +159,7 @@ local function init()
   Tail.dy = Head.dy
   direction = "right"
   
-  lcd.drawRectangle(1 ,1 ,(LCD_W - 1), (LCD_H - 1))
+  --lcd.drawRectangle(1 ,1 ,(LCD_W - 1), (LCD_H - 1))  ------- too keep it to 222 points
 
   for i = 0, xMax, 1 do
     game_map[ i ] = {}
