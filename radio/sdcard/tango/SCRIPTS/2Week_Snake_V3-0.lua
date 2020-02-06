@@ -38,6 +38,11 @@ local score = 0
 local foodCount = 0
 local twoWeeksScore = 0
 
+function sleep(ms)
+  local ntime = getTime(ms)
+  repeat until getTime > ntime
+end
+
 local function twoWeeks()
  twoWeeksScore = twoWeeksScore + 0.2
   if foodCount == 0 then
@@ -181,34 +186,16 @@ local function scoreOutput()
            lcd.drawText((LCD_W / 4), 1, "YOU WIN!", XXLSIZE) 
            lcd.drawtext(1, (LCD_H / 4), "You have 120 Seconds to take a photo of this screen", BLINK)
            lcd.drawtext(1, (LCD_H / 4), "Please post it to the Team Blacksheep Lounge on FB", INVERS)
-             for j=0, 120, 1 do
-               lcd.refresh()
-             end
+             sleep(12000)
           end
   
   lcd.clear()  
-  --  for i=0, LCD_H, 1 do
-  --    for k=0, LCD_W, 1 do
-  --      lcd.drawText( i,k,"*", 0)
-  --    end
-  --  end
-  
-  --blankRectangle()
   endScreen()
-  lcd.refresh()
+  sleep(500)
   
-  --  for i=0, LCD_H, 1 do
-  --     for k=0, LCD_W, 1 do
-  --       lcd.drawText( i,k,"*", INVERS)
-  --     end
---  end
--- blankRectangle()
--- endScreen()
+
   
- lcd.refresh() 
- lcd.refresh()
- lcd.refresh()
- lcd.refresh()
+ 
 end
 
 local snakeCounter = 0
@@ -254,7 +241,7 @@ local function run(event)
   direction = dir
   move()
 
-  lcd.refresh()
+  sleep(50)
  
   if score == 222 then
     scoreOutput()
