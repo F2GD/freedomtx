@@ -11,8 +11,8 @@
 -- Massive thanks to Marc Stelzner for testing adn bug finding
 --------------------------------------------------------------
 
-local xMax = math.floor( LCD_W / 6 ) - 1
-local yMax = math.floor( LCD_H / 8 ) - 1
+local xMax = math.floor( LCD_W / 6 ) - 2
+local yMax = math.floor( LCD_H / 8 ) - 2
 local game_map = {}
 
 local Head = {}
@@ -76,9 +76,9 @@ local function eat_food()
 end
 
 local function check_collision()
-  if Head.x < 0 or Head.x > xMax then
+  if Head.x < 1 or Head.x > xMax then
     return true
-  elseif Head.y < 0 or Head.y > yMax then
+  elseif Head.y < 1 or Head.y > yMax then
     return true
   elseif ( ( game_map[ Head.x ][ Head.y ] ) and ( game_map[ Head.x ][ Head.y ] ~= "food" ) ) then
     return true
