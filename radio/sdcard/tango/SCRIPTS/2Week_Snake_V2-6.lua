@@ -186,25 +186,24 @@ local function scoreOutput()
              end
           end
   
-    
-    for i=0, LCD_H, 1 do
-      for k=0, LCD_W, 1 do
-        lcd.drawText( i,k,"*", 0)
-      end
-    end
+  lcd.clear()  
+  --  for i=0, LCD_H, 1 do
+  --    for k=0, LCD_W, 1 do
+  --      lcd.drawText( i,k,"*", 0)
+  --    end
+  --  end
   
   blankRectangle()
   endScreen()
   lcd.refresh()
   
-    for i=0, LCD_H, 1 do
-       for k=0, LCD_W, 1 do
-         lcd.drawText( i,k,"*", INVERS)
-       end
-   
-  end
- blankRectangle()
- endScreen()
+  --  for i=0, LCD_H, 1 do
+  --     for k=0, LCD_W, 1 do
+  --       lcd.drawText( i,k,"*", INVERS)
+  --     end
+--  end
+-- blankRectangle()
+-- endScreen()
   
  lcd.refresh() 
  lcd.refresh()
